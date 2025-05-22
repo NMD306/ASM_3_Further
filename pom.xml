@@ -38,6 +38,20 @@
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JavaFX -->
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-controls</artifactId>
+            <version>20</version>
+        </dependency>
+
+        <!-- SQLite JDBC -->
+        <dependency>
+            <groupId>org.xerial</groupId>
+            <artifactId>sqlite-jdbc</artifactId>
+            <version>3.36.0.3</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -61,7 +75,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                org.example.further_programming/org.example.further_programming.HelloApplication
+                                org.example.further_programming/org.example.further_programming.MainApp
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
