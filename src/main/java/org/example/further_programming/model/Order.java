@@ -8,11 +8,9 @@ public class Order {
     private int id;
     private double totalPrice;
     private LocalDate date;
-
-    private Customer customer; // Bi-directional
-    private Deliveryman deliveryman; // Bi-directional
-
-    private List<Item> items = new ArrayList<>(); // Unidirectional
+    private Customer customer;
+    private Deliveryman deliveryman;
+    private List<OrderItem> items = new ArrayList<>();
 
     public Order(int id, double totalPrice, LocalDate date, Customer customer, Deliveryman deliveryman) {
         this.id = id;
@@ -32,8 +30,31 @@ public class Order {
     public Deliveryman getDeliveryman() { return deliveryman; }
     public void setDeliveryman(Deliveryman deliveryman) { this.deliveryman = deliveryman; }
 
-    public List<Item> getItems() { return items; }
-    public void addItem(Item item) {
-        items.add(item);
+    public List<OrderItem> getItems() { return items; }
+
+    /**
+     * Adds a new item to the order. Each item can only appear once.
+     * If item already exists, it won’t be added again.
+     */
+    public void addItem(OrderItem newItem) {
+        for (OrderItem existing : items) {
+            if (existing.getItemId() == newItem.getItemId()) {
+                System.out.println("⚠️ Item already exists in this order: " + newItem.getItemName());
+                return;
+            }
+        }
+        items.add(newItem);
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", totalPrice=" + totalPrice +
+                ", date=" + date +
+                ", customer=" + customer.getName() +
+                ", deliveryman=" + deliveryman.getName() +
+                ", items=" + items.size() +
+                '}';
     }
 }
